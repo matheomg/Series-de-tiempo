@@ -1,0 +1,57 @@
+#Ejemplo serie 1
+
+#Datos
+install.packages("fpp")
+library(fpp)
+data(ausbeer)
+class(ausbeer)
+plot(ausbeer)
+#definir una serie de tiempo
+beer = ts(data=ausbeer,frequency = 4,start=c(1956,1))
+class(beer)
+plot(beer)
+
+#Tendencia
+install.packages("forecast")
+library(forecast)
+trend_beer = ma(beer, order = 4, centre = T)
+plot(beer,col="red")
+lines(trend_beer,col="blue")
+
+#Quitar tendencia
+detrend_beer = beer - trend_beer
+plot(as.ts(detrend_beer))
+
+#Estacionalidad
+m_beer = t(matrix(data = detrend_beer, nrow = 4))
+seasonal_beer = colMeans(m_beer, na.rm= T)
+plot(as.ts(rep(seasonal_beer,13)))
+
+#Residuo
+noise_beer = beer - trend_beer - seasonal_beer
+plot(as.ts(noise_beer))
+
+#Reconstrucción de la serie original
+recomposed_beer = trend_beer+seasonal_beer+noise_beer
+plot(as.ts(recomposed_beer))
+
+
+#una forma prática
+plot(decompose(beer,type="additive"))
+
+
+
+
+#Trabajo en clase serie 2
+
+install.packages("Ecdat")
+library(Ecdat)
+data(AirPassengers)
+Air = AirPassengers
+plot(as.ts(Air))
+plot(decompose(Air,type="multiplicative"))
+
+
+HW.AP <- HoltWinters(AirPassengers, seasonal = "mult")
+plot(HW.AP)
+plot(fitted(HW.AP))

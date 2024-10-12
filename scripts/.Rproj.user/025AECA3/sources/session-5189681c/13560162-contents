@@ -1,0 +1,38 @@
+#Annual Rainfall in Los Angeles
+install.packages("TSA")
+library(TSA)
+win.graph(width=4.875, height=2.5,pointsize=8)
+data(larain); plot(larain,ylab='Inches',xlab='Year',type='o')
+
+win.graph(width=3,height=3,pointsize=8)
+plot(y=larain,x=zlag(larain),ylab='Inches',
+     xlab='Previous Year Inches')
+
+#An Industrial Chemical Process (Color property)
+win.graph(width=4.875, height=2.5,pointsize=8)
+data(color)
+plot(color,ylab='Color Property',xlab='Batch',type='o')
+
+win.graph(width=3,height=3,pointsize=8)
+plot(y=color,x=zlag(color),ylab='Color Property',
+     xlab='Previous Batch Color Property')
+
+# Annual Abundance of Canadian Hare
+win.graph(width=4.875, height=2.5,pointsize=8)
+data(hare); plot(hare,ylab='Abundance',xlab='Year',type='o')
+
+win.graph(width=3, height=3,pointsize=8)
+plot(y=hare,x=zlag(hare),ylab='Abundance',
+     xlab='Previous Year Abundance')
+
+#Monthly Average Temperatures in Dubuque, Iowa
+win.graph(width=4.875, height=2.5,pointsize=8)
+data(tempdub); plot(tempdub,ylab='Temperature',type='o')
+
+
+#Monthly Oil Filter Sales
+data(oilfilters); plot(oilfilters,type='o',ylab='Sales')
+
+plot(oilfilters,type='l',ylab='Sales')
+points(y=oilfilters,x=time(oilfilters),
+       pch=as.vector(season(oilfilters)))
