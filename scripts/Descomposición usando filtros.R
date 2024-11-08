@@ -1,7 +1,7 @@
 library(readxl)
 library(stats)
 library(mFilter)
-#Datos <- read_excel("C:/Users/alan_/OneDrive - Pontificia Universidad Católica del Ecuador/Macroeconometría/Ejercicio 1.xlsx")
+Datos <- read_excel("C:/GitHub/Series_de_tiempo/data/Ejercicio 1.xlsx")
 View(Datos)
 plot(Datos$Inflación)
 Infl <- ts(Datos$Inflación, start = c(2010,1), frequency = 12)
